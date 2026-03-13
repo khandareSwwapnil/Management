@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSM | Home</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6fa;
+        }
+
+
+        /*Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #4a7bfd;
+            padding: 15px 30px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 22px;
+
+        }
+
+        .navbar button{
+            background: white;
+            color: #4a7bfd;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .navbar button:hover{
+            background: #eaeaea;
+        }
+
+        /* Dashboard Cards */
+        .container {
+            margin: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card{
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover{
+            transform: translateY(-5px);
+        }
+
+        .card h3{
+            margin: 0;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin-top: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!--NAvbar-->
+    <div class="navbar">
+        <h1>🏨 Hostel Management System</h1>
+        <button onclick="logout()">logout</button>
+    </div>
+
+    <div class="container">
+
+        <div class="card" onclick="goTo('hostel.html')">
+            <h3>🏬 Hostels </h3>
+            <p>Manage Hostel Details</Details></p>
+        </div>
+
+        <div class="card" onclick="goTo('building.html')">
+            <h3>🏬 Buildings</h3>
+            <p>View / Add Building Blocks</p>
+        </div>
+
+        <div class="card" onclick="goTo('floors.html')">
+            <h3>🏢 Floors</h3>
+            <p>Manage Floor Details </p>
+        </div>
+
+        <div class="card" onclick="goTo('rooms.html')">
+            <h3>🚪 Rooms</h3>
+            <p>Room Types, Sharing, Facilities</p>
+        </div>
+
+        <div class="card" onclick="goTo('beds.html')">
+            <h3>🛏️ Beds</h3>
+            <p>Allocate or Track Bed Status</p>
+        </div>
+
+        <div class="card" onclick="goTo('booking.html')">
+            <h3>🏷️ Booking</h3>
+            <p>Student Booking & Allocations</p>
+        </div>
+
+        <div class="card" onclick="goTo('payment.html')">
+            <h3>💳 Payments</h3>
+            <p>Payment History & Invoices</p>
+        </div>
+
+        <div class="card" onclick="goTo('users.html')">
+            <h3>👤 Users</h3>
+            <p>User Profiles & Roles</p>
+        </div>
+
+
+    </div>
+
+    <script>
+        function goTo(page) {
+            window.location.href = page;
+        }
+
+        function logout() {
+            alert("Logged out successfully!");
+            window.location.href = "login.html";
+        }
+    </script>
+    
+</body>
+</html>
