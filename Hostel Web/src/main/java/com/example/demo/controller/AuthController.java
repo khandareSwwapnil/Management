@@ -202,7 +202,7 @@ public class AuthController {
 	                .orElseThrow(() -> new RuntimeException("Email not registered"));
 	    } else {
 	        user = userRepository.findByMobile(request.getMobile())
-	                .orElseThrow(() -> new RuntimeException("Mobile not registered"));
+	                .orElseThrow(() -> new RuntimeException("Mobile No not registered"));
 	    }
 
 	    String otp = OtpUtil.generateOtp();
