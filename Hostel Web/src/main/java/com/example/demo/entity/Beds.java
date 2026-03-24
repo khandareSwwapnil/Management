@@ -70,6 +70,16 @@ public class Beds {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+	public boolean isOccupied() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setOccupied(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

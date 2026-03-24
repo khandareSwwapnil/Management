@@ -15,7 +15,10 @@ import com.example.demo.repository.RoomsRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.BookingService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
