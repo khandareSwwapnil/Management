@@ -1,0 +1,45 @@
+pipeline {
+	agent any
+	
+	tools {
+		jdk 'JDK17'
+		maven 'MAVEN3'
+		nodejs 'Node18'
+	}
+	
+	stages {
+		
+		stage('Step 1 - Download Code from GitHub') {
+			steps {
+				git branch: 'main',
+					url: 'https://github.com/khandareSwwapnil/Hostel-Management-System-.git',
+					GITHUB_TOKEN = credentials('github-token')
+					
+			}
+		}
+		
+		stage('Step 2 - Backend Build & Test') {
+			steps {
+				sh 'mvn clean test package'
+			}
+		}
+		
+		stage('Step 3 - Frontend Build') {
+			steps {
+				dir('Hostel-frontend/hms-frontend') {
+					sh 'npm install'
+					sh 'npm run build'
+				}
+			}
+		}
+	}
+	
+	post {
+		success {
+			echo "✅ BUILD SUCCESS - Email feature is OK"
+		}
+		failure {
+			echo "❌ BUILD FAILED - Something is wrong"
+		}
+	}
+}
