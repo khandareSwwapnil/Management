@@ -54,9 +54,7 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> new RuntimeException("Room not found with id: " + id));
 
     
-        if (roomData.getPrice() != null) {
-            room.setPrice(roomData.getPrice());
-        }
+        
 
         if (roomData.getStatus() != null) {
             room.setStatus(roomData.getStatus());
