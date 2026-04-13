@@ -27,14 +27,15 @@ stages {
         }
     }
 
-    stage('Frontend Build') {
-        steps {
-            dir('Hostel-frontend/hms-frontend') {
-                sh 'npm install'
-                sh 'npm run build'
-            }
+   stage('Frontend Build') {
+    steps {
+        dir('Hostel Web/Hostel-frontend/hms-frontend') {
+            bat 'dir'        // debug (must show package.json)
+            bat 'npm install'
+            bat 'npm run build'
         }
     }
+}
 
     
     stage('Archive Artifacts') {
