@@ -33,7 +33,7 @@ stages {
             bat 'dir'        // debug (must show package.json)
             bat 'npm install'
             bat 'npm run build'
-        }
+        } 
     }
 }
 
