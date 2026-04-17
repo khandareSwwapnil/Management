@@ -1,61 +1,47 @@
 pipeline {
-agent any
+    agent any
 
-tools {
-    jdk 'JDK17'
-    maven 'Maven3'
-    nodejs 'Node18'
-}
+    tools {
+        jdk 'JDK17'
+        maven 'Maven3'
+        // ❌ nodejs removed
+    }
 
-environment {
-    GIT_CREDENTIALS = 'github-token'   
-}
+    environment {
+        GIT_CREDENTIALS = 'github-token'
+    }
 
-stages {
+    stages {
 
-    stage('Checkout Code') {
-        steps {
-            git branch: 'main',
-                url: 'https://github.com/khandareSwwapnil/Hostel-Management-System-.git',
-                
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/khandareSwwapnil/Hostel-Management-System-.git'
+            }
+        }
+
+        stage('Backend Build & Test') {
+            steps {
+                bat 'mvn clean test package'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
         }
     }
 
-    stage('Backend Build & Test') {
-        steps {
-            sh 'mvn clean test package'
+    post {
+        success {
+            echo "✅ BUILD SUCCESS"
+        }
+        failure {
+            echo "❌ BUILD FAILED"
+        }
+        always {
+            cleanWs()
         }
     }
-
-   stage('Frontend Build') {
-    steps {
-        dir('Hostel Web/Hostel-frontend/hms-frontend') {
-            bat 'dir'        // debug (must show package.json)
-            bat 'npm install'
-            bat 'npm run build'
-        } 
-    }
-}
-
-    
-    stage('Archive Artifacts') {
-        steps {
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-        }
-    }
-}
-
-post {
-    success {
-        echo "✅ BUILD SUCCESS"
-    }
-    failure {
-        echo "❌ BUILD FAILED"
-    }
-    always {
-        cleanWs()
-    }
-}
-
-
 }
