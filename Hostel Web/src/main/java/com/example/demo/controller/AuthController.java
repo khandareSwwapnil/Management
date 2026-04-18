@@ -44,7 +44,8 @@ public class AuthController {
 
 	    if (!request.getPassword().equals(request.getConfirmPassword())) {
 	        return ResponseEntity.badRequest()
-	                .body(Map.of("success", false, "message", "Password is not matched "));
+	                .body(Map.of("success", false, "message", "Password is not matched "
+	                		+ "."));
 	    }
 
 	    Optional<User> existing = userRepository.findByEmail(request.getEmail());
