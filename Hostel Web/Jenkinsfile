@@ -1,47 +1,22 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK17'
-        maven 'Maven3'
-        // ❌ nodejs removed
-    }
-
-    environment {
-        GIT_CREDENTIALS = 'github-token'
-    }
-
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/khandareSwwapnil/Hostel-Management-System-.git'
+                git credentialsId: 'github-token',
+                    url: 'https://github.com/khandareSwwapnil/Management.git',
+                    branch: 'main'
             }
         }
 
         stage('Backend Build & Test') {
             steps {
-                bat 'mvn clean test package'
+                dir('Hostel Web') {
+                    bat 'mvn clean package'
+                }
             }
-        }
-
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-            }
-        }
-    }
-
-    post {
-        success {
-            echo "✅ BUILD SUCCESS"
-        }
-        failure {
-            echo "❌ BUILD FAILED"
-        }
-        always {
-            cleanWs()
         }
     }
 }
