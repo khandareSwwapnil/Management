@@ -11,12 +11,37 @@ pipeline {
             }
         }
 
-        stage('Backend Build & Test') {
+        stage('Build Backend') {
             steps {
                 dir('Hostel Web') {
-                    bat 'mvn clean package'
+                    bat 'mvnw.cmd clean package'
                 }
             }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                dir('Hostel Web') {
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
+        }
+
+        stage('Run Application (Local Deploy)') {
+            steps {
+                dir('Hostel Web') {
+                    bat 'start java -jar target/*.jar'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ BUILD SUCCESS'
+        }
+        failure {
+            echo '❌ BUILD FAILED'
         }
     }
 }
