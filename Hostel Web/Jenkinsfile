@@ -11,10 +11,17 @@ pipeline {
             }
         }
 
+        stage('Check Java') {
+            steps {
+                bat 'java -version'
+                bat 'echo %JAVA_HOME%'
+            }
+        }
+
         stage('Build Backend') {
             steps {
                 dir('Hostel Web') {
-                    bat 'mvnw.cmd clean package'
+                    bat 'mvn clean package'
                 }
             }
         }
