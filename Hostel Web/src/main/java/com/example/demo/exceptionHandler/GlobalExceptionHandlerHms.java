@@ -12,7 +12,7 @@ import com.example.demo.contants.Constant;
 import com.example.demo.contants.ErrorConstant;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandlerHms {
 	
 	
 	@ExceptionHandler(UserExceptionHandler.class)

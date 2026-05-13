@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS'   // 👈 configure in Jenkins (important)
-    }
-
     stages {
 
         stage('Checkout Code') {
@@ -14,7 +10,7 @@ pipeline {
                     branch: 'main'
             }
         }
-        
+
         stage('Check Java') {
             steps {
                 bat 'java -version'
@@ -22,36 +18,10 @@ pipeline {
             }
         }
 
-        // ✅ FRONTEND STAGE
-        stage('Frontend Install Dependencies') {
-            steps {
-                dir('frontend') {   // ⚠️ change if folder name is different
-                    bat 'npm install'
-                }
-            }
-        }
-
-        stage('Frontend Test') {
-            steps {
-                dir('frontend') {
-                    bat 'npm test -- --watchAll=false'
-                }
-            }
-        }
-
-        stage('Frontend Build') {
-            steps {
-                dir('frontend') {
-                    bat 'npm run build'
-                }
-            }
-        }
-
-        // ✅ BACKEND STAGE
         stage('Build Backend') {
             steps {
                 dir('Hostel Web') {
-                    bat 'mvnw.cmd clean package'
+                    bat 'mvn clean package'
                 }
             }
         }
